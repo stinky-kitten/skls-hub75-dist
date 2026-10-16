@@ -1,0 +1,13 @@
+# Release binaries remain immutable external assets, never Git contents.
+release-assets/
+.build/
+.swiftpm/
+.DS_Store
+*.a
+*.o
+*.zip
+*.tar.gz
+*.private-build-record.json
+
+# Unapproved original-work terms are private review inputs, never Git content.
+/LICENSES/PROPOSED-TERMS.md

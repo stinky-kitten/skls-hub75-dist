@@ -1,0 +1,24 @@
+Name: SKLSHUB75
+Functions:
+- Name: skls_hub75_take_render_request
+  SwiftName: takeRenderRequest(_:)
+  Parameters:
+  - Position: 0
+    Nullability: O
+- Name: skls_hub75_config_preset_6bit_4phase_240hz
+  Parameters:
+  - Position: 0
+    Nullability: N
+  - Position: 1
+    Nullability: N
+Tags:
+- Name: skls_hub75_render_request_t
+  SwiftName: RenderRequest
+- Name: skls_hub75_transfer_mode_t
+  SwiftName: TransferMode
+  EnumKind: NSEnum
+Enumerators:
+- Name: SKLS_HUB75_TRANSFER_MODE_LINEAR
+  SwiftName: TransferMode.linear
+- Name: SKLS_HUB75_TRANSFER_MODE_GAMMA
+  SwiftName: TransferMode.gamma

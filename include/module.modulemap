@@ -1,0 +1,4 @@
+module SKLSHUB75 {
+    header "skls_hub75/skls_hub75.h"
+    export *
+}
