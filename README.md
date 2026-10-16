@@ -5,20 +5,26 @@ Raspberry Pi Pico 2 and Pico 2 W, qualified with Pico SDK 2.3.1 and 150 MHz clk_
 Embedded Swift is a supported consumer through the **SKLSHUB75 Clang module** and
 versioned **SKLSHUB75.apinotes**. C and C++ use the same public C interface.
 
-**Prepared locally; not published.** No original-work distribution licence has
-been approved. Unapproved terms and owner/company agreements are kept outside this
-Git repository. The retained local candidate contains draft terms for private
-review only; its checksum does not authorize publication. See
-[release blockers](LICENSES/RELEASE-BLOCKERS.md). Third-party notices preserve their
-existing rights separately and do not grant rights to the original driver.
-No public download is live yet.
+**Prepared locally; not published.** The approved
+[Stinky Kitten HUB75 Binary Library Licence — Version 1.0](LICENSES/SKLS-HUB75-BINARY-LICENCE-1.0.txt)
+covers Stinky Kitten Limited's original contributions (company number 07306644).
+It permits worldwide, royalty-free personal, educational, research and commercial
+use, linking into proprietary/open-source firmware, and distribution/sale of
+completed firmware and updates, including compliant redistribution received from
+others. No registration, royalties or application source disclosure is required.
+Public interface and integration-utility use, copying, modification and
+redistribution are permitted with applicable notices, including SwiftPM manifests
+and Python tooling. This does not grant modification rights to the compiled driver.
+Standalone proprietary library redistribution and incorporation into publicly
+distributed SDKs or reusable binary components require separate permission.
+These restrictions do not apply to completed firmware or independently BSD-licensed
+third-party contributions. See [NOTICE.md](LICENSES/NOTICE.md) and the full licence.
 
 The intended official repository is https://github.com/stinky-kitten/skls-hub75-dist .
-A future experimental GitHub Release `v0.1.0-experimental.1` will provide one complete
-`skls-hub75-0.1.0-experimental.1-rp2350-arm-s.zip` asset and SHA256SUMS. This URL is
-planned, not a claim of current availability. Original-work permissions, including
-binary redistribution and finished-firmware distribution, require final approved
-terms. This technical repository does not grant those permissions.
+The planned tag is `v0.1.0-experimental.1`, with one complete
+`skls-hub75-0.1.0-experimental.1-rp2350-arm-s.zip` asset and SHA256SUMS.
+No public download is live yet. Public download, checksum and exact-version SwiftPM
+tag verification are performed as part of publishing the approved release.
 
 ## Firmware consumption
 
@@ -78,10 +84,8 @@ experimental version; layout/enum/calling-convention changes require ABI review.
 immutable assets and the approval/publication boundary. `release.json` records exact
 asset and component hashes. Do not commit generated Arm libraries into this repository.
 
-Historical interface notices are preserved verbatim; final publication notices await
-formal agreement and approval. Intended publisher/distributor: Stinky Kitten Limited,
-as proposed commercial licensee;
-its formal licensing authority and final public terms remain approval gates.
-Third-party ownership and permissions remain as stated in LICENSES.
-[PIO provenance/modifications](LICENSES/PIO-PROVENANCE.md) and complete Raspberry Pi
-BSD notices accompany the binary; proprietary terms do not override those rights.
+Existing interface notice text is preserved verbatim. Stinky Kitten Limited owns
+its original driver contributions; Raspberry Pi retains ownership of its BSD-licensed
+contributions. [PIO provenance/modifications](LICENSES/PIO-PROVENANCE.md) and complete
+Raspberry Pi BSD notices accompany the binary. The custom licence does not override
+independently granted BSD rights. No proprietary driver source is distributed.

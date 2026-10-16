@@ -16,12 +16,12 @@ BASE = {
     *("include/skls_hub75/" + x + ".h" for x in ["skls_hub75", "skls_hub75_config", "skls_hub75_config_validation", "skls_hub75_driver", "skls_hub75_presets", "skls_hub75_profile", "skls_hub75_render_request", "skls_hub75_binary_config"]),
     "lib/libskls_hub75.a", "cmake/SKLSHUB75Config.cmake", "cmake/SKLSHUB75ConfigVersion.cmake",
     "README.md", "docs/ABI.md", "docs/SWIFT.md", "docs/RELEASE.md",
-    "LICENSES/NOTICE.md", "LICENSES/RELEASE-BLOCKERS.md", "LICENSES/PICO-SDK-BSD-3-Clause.txt",
+    "LICENSES/NOTICE.md", "LICENSES/PICO-SDK-BSD-3-Clause.txt",
+    "LICENSES/SKLS-HUB75-BINARY-LICENCE-1.0.txt",
 }
-TERMS = "LICENSES/PROPOSED-TERMS.md"  # Retained draft payload name, never a Git input.
-PREPARATION_DOCS = {"README.md", "docs/RELEASE.md"}
-OVERLAYS = ["README.md", "docs/RELEASE.md", "LICENSES/RELEASE-BLOCKERS.md", "LICENSES/PIO-PROVENANCE.md", "LICENSES/PICO-EXAMPLES-BSD-3-Clause.txt"]
-SYNC = [x for x in BASE if x.startswith("include/")] + ["docs/ABI.md", "docs/SWIFT.md", "LICENSES/NOTICE.md", "LICENSES/PICO-SDK-BSD-3-Clause.txt"]
+LICENCE = "LICENSES/SKLS-HUB75-BINARY-LICENCE-1.0.txt"
+OVERLAYS = ["README.md", "docs/RELEASE.md", "LICENSES/PIO-PROVENANCE.md", "LICENSES/PICO-EXAMPLES-BSD-3-Clause.txt"]
+SYNC = [x for x in BASE if x.startswith("include/")] + ["docs/ABI.md", "docs/SWIFT.md", "LICENSES/NOTICE.md", "LICENSES/PICO-SDK-BSD-3-Clause.txt", LICENCE]
 
 def digest(data):
     return hashlib.sha256(data).hexdigest()
@@ -30,6 +30,8 @@ def checked_manifest(files):
     manifest = json.loads(files["manifest.json"])
     if manifest["version"] != VERSION or manifest["abi_version"] != 1:
         raise ValueError("Unexpected package version or ABI")
+    if manifest.get("legal_status") != "approved-binary-and-interface-licence-v1.0" or manifest.get("binary_licence") != LICENCE:
+        raise ValueError("Candidate must include the approved binary/interface licence")
     if set(files) != set(manifest["files"]) | {"manifest.json"}:
         raise ValueError("Manifest file inventory mismatch")
     for name, expected in manifest["files"].items():
@@ -44,7 +46,7 @@ def audit_paths(files):
         if re.search(rb"(?:/Users/|/home/|/private/|/tmp/|[A-Za-z]:\\Users\\)", data):
             raise ValueError("Private absolute path in " + name)
 
-def check(asset, allow_preparation_doc_drift=False):
+def check(asset):
     with zipfile.ZipFile(asset) as archive:
         files = {}
         for item in archive.infolist():
@@ -57,38 +59,21 @@ def check(asset, allow_preparation_doc_drift=False):
             if name in files or item.is_dir():
                 raise ValueError("Duplicate or unexpected archive member")
             files[name] = archive.read(item)
-    if set(files) != BASE | set(OVERLAYS) | {TERMS, "manifest.json"}:
+    if set(files) != BASE | set(OVERLAYS) | {"manifest.json"}:
         raise ValueError("Final payload allowlist mismatch")
     manifest = checked_manifest(files)
     audit_paths(files)
     release = json.loads((ROOT / "release.json").read_text())
-    if allow_preparation_doc_drift and (
-        release["legal_status"] != "draft-requires-explicit-approval"
-        or release["publication_status"] != "prepared-not-published"
-    ):
-        raise ValueError("Preparation-document drift is allowed only for unpublished draft metadata")
-    drift = []
     for name in SYNC + OVERLAYS:
         if (ROOT / name).read_bytes() != files[name]:
-            if allow_preparation_doc_drift and name in PREPARATION_DOCS:
-                drift.append(name)
-            else:
-                raise ValueError("Public snapshot differs from asset: " + name)
+            raise ValueError("Public snapshot differs from asset: " + name)
     if digest(Path(asset).read_bytes()) != release["asset_sha256"]:
         raise ValueError("Release asset checksum mismatch")
     if release["component_sha256"] != manifest["files"] or release["manifest_sha256"] != digest(files["manifest.json"]):
         raise ValueError("Release component metadata mismatch")
-    print("Verified immutable asset, manifest, public interfaces, notice snapshots and pinned draft terms")
-    for name in drift:
-        print("Preparation document differs from retained draft:", name)
-    if drift:
-        print("A new reviewed candidate is required before publication; retained bytes and pins are unchanged")
+    print("Verified immutable asset, manifest, interfaces, approved licence and third-party notices")
 
-def prepare(candidate, output, terms):
-    terms = terms.resolve()
-    if terms.is_relative_to(ROOT.resolve()):
-        raise ValueError("Unapproved terms must be an explicit private input outside this Git repository")
-    terms_data = terms.read_bytes()
+def prepare(candidate, output):
     candidate = candidate.resolve()
     paths = list(candidate.rglob("*"))
     if any(p.is_symlink() for p in paths):
@@ -104,18 +89,14 @@ def prepare(candidate, output, terms):
     asset = output / ASSET
     if asset.exists() or (output / "SHA256SUMS").exists():
         raise ValueError("Refusing to overwrite retained release output; choose a new candidate directory")
-    # Public interfaces remain byte-for-byte producer outputs, including legacy
-    # notices. Final ownership wording requires the owner/company agreement.
+    # Public interfaces and canonical licence/notices remain producer outputs.
     for name in OVERLAYS:
         files[name] = (ROOT / name).read_bytes()
-    files[TERMS] = terms_data
-    files["LICENSES/NOTICE.md"] = files["LICENSES/NOTICE.md"].replace(b"This is a notice inventory for a private binary candidate, not permission to", b"This is the incorporated-material notice inventory, not permission to")
-    files["LICENSES/NOTICE.md"] += b"\nThe PIO comparison and modifications are documented in PIO-PROVENANCE.md.\nPICO-EXAMPLES-BSD-3-Clause.txt includes the complete applicable upstream licence.\nRaspberry Pi's BSD-licensed contribution remains distinct from original proprietary\ncode; proposed proprietary restrictions do not withdraw its existing BSD rights.\n"
-    manifest["publication_status"] = "prepared-not-published-pending-license-rights-and-release-approval"
-    manifest["publication_notice_status"] = "legacy notices preserved; final wording pending formal owner/company agreement and approval"
-    manifest["intended_original_rights_holder"] = "Gary J.H. Atkinson"
-    manifest["intended_publisher"] = "Stinky Kitten Limited"
-    manifest["publisher_capacity"] = "proposed commercial licensee; formal authority pending"
+    manifest["publication_status"] = "prepared-not-published-pending-release-approval"
+    manifest["legal_status"] = "approved-binary-and-interface-licence-v1.0"
+    manifest["original_rights_holder"] = "Stinky Kitten Limited"
+    manifest["company_number"] = "07306644"
+    manifest["binary_licence"] = LICENCE
     manifest["files"] = {name: digest(data) for name, data in sorted(files.items()) if name != "manifest.json"}
     files["manifest.json"] = (json.dumps(manifest, indent=2, sort_keys=True) + "\n").encode()
     audit_paths(files)
@@ -138,7 +119,7 @@ def prepare(candidate, output, terms):
         "asset_url": "https://github.com/stinky-kitten/skls-hub75-dist/releases/download/v" + VERSION + "/" + ASSET,
         "asset_sha256": checksum, "asset_bytes": asset.stat().st_size,
         "manifest_sha256": digest(files["manifest.json"]), "component_sha256": manifest["files"],
-        "publication_status": "prepared-not-published", "legal_status": "draft-requires-explicit-approval",
+        "publication_status": "prepared-not-published", "legal_status": "approved-binary-and-interface-licence-v1.0",
     }
     (ROOT / "release.json").write_text(json.dumps(release, indent=2, sort_keys=True) + "\n")
     check(asset)
@@ -150,20 +131,15 @@ if __name__ == "__main__":
     parser.add_argument("--candidate", type=Path)
     parser.add_argument("--output", type=Path)
     parser.add_argument("--check", type=Path)
-    parser.add_argument("--terms", type=Path, help="Private external draft terms; required for preparation")
-    parser.add_argument("--allow-preparation-doc-drift", action="store_true",
-                        help="Explicitly permit only README/release-procedure drift for an unpublished draft check")
     args = parser.parse_args()
     try:
         if args.check:
-            if args.terms or args.candidate or args.output:
+            if args.candidate or args.output:
                 parser.error("Use --check separately from preparation inputs")
-            check(args.check, args.allow_preparation_doc_drift)
-        elif args.candidate and args.output and args.terms:
-            if args.allow_preparation_doc_drift:
-                parser.error("Preparation-document drift applies only to --check")
-            prepare(args.candidate, args.output, args.terms)
+            check(args.check)
+        elif args.candidate and args.output:
+            prepare(args.candidate, args.output)
         else:
-            parser.error("Use --candidate, --output and --terms, or --check")
+            parser.error("Use --candidate and --output, or --check")
     except (OSError, ValueError, KeyError, zipfile.BadZipFile) as error:
         raise SystemExit(str(error))

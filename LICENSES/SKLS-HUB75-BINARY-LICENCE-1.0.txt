@@ -1,0 +1,122 @@
+Stinky Kitten HUB75 Binary Library Licence — Version 1.0
+
+Copyright © 2025–2026 Stinky Kitten Limited.
+Company number 07306644.
+
+1. Scope and definitions
+
+Stinky Kitten Limited (the Company) owns the copyright in its original
+contributions to the skls-hub75 driver. This Licence applies to those original
+contributions in the compiled driver distributed as libskls_hub75.a (the Library)
+and the Interface Files. Third-party contributions remain separately owned and
+licensed as explained in section 5 and LICENSES/NOTICE.md.
+
+Interface Files means the public C headers, CMake integration files, Swift API
+notes, module maps, SwiftPM manifests and declaration-only integration stubs,
+Python tooling, other integration utilities and associated documentation
+distributed or published for packaging, building, testing or using the Library.
+Interface Files exclude the compiled Library and proprietary driver implementation
+source code.
+
+Completed Firmware means completed application or device firmware incorporating
+the linked Library, including firmware updates and copies of that firmware
+received from others. It does not mean a standalone library, publicly distributed
+SDK, binary library package or reusable development component.
+
+2. Permissions
+
+Subject to this Licence, the Company grants you worldwide, non-exclusive,
+royalty-free permission to:
+
+(a) use the compiled Library for personal, educational, research and commercial
+    purposes;
+(b) link the Library into proprietary or open-source firmware;
+(c) make copies reasonably necessary for development, building, testing and
+    maintenance, including necessary internal build, CI and cache copies;
+(d) distribute and sell Completed Firmware incorporating the Library, including
+    firmware updates;
+(e) redistribute Completed Firmware received from others, subject to applicable
+    licence conditions for that firmware and its other components; and
+(f) publish application source code and build scripts that retrieve the Library
+    from an authorised Stinky Kitten distribution.
+
+No registration, royalties or obligation to publish application source code is
+required. This Licence grants rights in the Company's contributions; it does not
+grant rights in another person's application or other firmware components.
+
+You may copy, use, modify and redistribute the Interface Files, with or without
+modification, including within your own application source distributions, provided
+applicable copyright and licence notices are preserved. This permission to modify
+and redistribute Interface Files does not grant permission to modify the compiled
+Library, redistribute the compiled .a library, or obtain proprietary driver source.
+Independently granted third-party and statutory rights remain unaffected.
+
+3. Standalone proprietary binary restrictions
+
+Redistribution of the standalone compiled Library, whether modified or unmodified,
+requires separate written permission from the Company. The Library must not be
+incorporated into another publicly distributed SDK, binary library package or
+reusable development component without the Company's permission.
+
+These restrictions do not apply to distributing Completed Firmware, including
+updates and compliant redistribution of Completed Firmware received from others.
+They do not prevent the normal application development, internal copying,
+interface-file redistribution or publication of retrieval scripts permitted by
+section 2. They do not restrict rights independently granted in third-party
+components or rights available under applicable law.
+
+4. Ownership, source and endorsement
+
+Copyright remains with the Company and the respective third-party contributors.
+No rights to proprietary driver source code are granted. The Library is not
+represented as an open-source distribution of that proprietary source. No implied
+endorsement or trademark rights are granted.
+
+5. Third-party components
+
+The Raspberry Pi-derived PIO programs and associated embedded C helpers, and
+incorporated Pico SDK header/inline material, retain their BSD-3-Clause licences
+and copyright notices. See LICENSES/NOTICE.md and the accompanying complete BSD
+licence texts. Preserve third-party notices and comply with their applicable
+conditions when distributing covered material, including in Completed Firmware.
+
+This Licence does not replace, override or withdraw any independently granted
+third-party rights. In particular, the restrictions on the standalone proprietary
+Library and combined distribution do not restrict Raspberry Pi's independently
+BSD-licensed contributions.
+
+6. Duration and termination
+
+The permissions are perpetual and irrevocable while their conditions are
+observed, subject only to the material-breach termination provision below.
+If a material breach remains uncorrected for 30 days following written notification
+identifying the breach, the Company may terminate your permissions under this
+Licence. The notification and opportunity to correct the breach apply before
+termination under this provision.
+
+Termination does not affect compliant recipients of previously distributed
+Completed Firmware. Such recipients retain these permissions while complying
+with the applicable licence conditions.
+
+7. Warranty disclaimer and liability
+
+To the fullest extent permitted by applicable law, the Library and Interface
+Files are provided "AS IS", without warranties of any kind, express or implied,
+including warranties of merchantability, fitness for a particular purpose and
+non-infringement. The Company does not warrant uninterrupted or error-free use.
+
+To the fullest extent permitted by applicable law, the Company is not liable for
+loss or damage arising from the Library or Interface Files or their use, including
+direct, indirect, incidental, special or consequential loss, loss of profits,
+data or business, however caused and under any theory of liability, even if
+advised of the possibility of such loss.
+
+Nothing in this Licence excludes or limits liability for death or personal injury
+caused by negligence, fraud or fraudulent misrepresentation, or any liability
+which cannot lawfully be excluded or limited. Mandatory statutory rights remain
+unaffected. Third-party disclaimers and liability provisions remain governed by
+their own licences.
+
+8. Governing law
+
+This Licence is governed by the law of England and Wales.

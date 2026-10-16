@@ -16,13 +16,16 @@ Dedicated Core 1 and PIO0 SM0/SM1, 21 PIO slots, a dynamically claimed DMA chann
 and conflict-free GPIO mapping are required. See docs/ABI.md.
 
 Asset and component checksums are recorded in release.json and SHA256SUMS.
-Original-work binary/interface terms are unapproved and are not included in Git.
-The retained local archive contains an unapproved legal draft for private review;
-its hashes in release.json identify those exact bytes, not approved permissions.
-Finalize the terms, prepare a new candidate and update/revalidate its checksum and
-consumer pin before publication. No original-work permissions are granted here.
-Do not publish this draft candidate before resolving LICENSES/RELEASE-BLOCKERS.md.
+The approved Stinky Kitten HUB75 Binary Library Licence — Version 1.0 is included
+in LICENSES/SKLS-HUB75-BINARY-LICENCE-1.0.txt. Stinky Kitten Limited
+(07306644) owns its original contributions. Completed firmware distribution/sale,
+updates, compliant received-firmware redistribution and public interface/tooling
+use, copying, modification and redistribution are permitted as specified in that
+licence. The modification grant excludes the compiled driver. Standalone proprietary library and
+reusable SDK/package redistribution require separate permission. Raspberry Pi's
+BSD rights and notices remain independent.
 
-Intended publisher: Stinky Kitten Limited as proposed commercial licensee, subject
-to an executed, legally reviewed owner-to-company agreement and final approval.
-Third-party terms and ownership are preserved separately.
+The new licensed candidate supersedes the earlier draft for future release review;
+earlier retained bytes remain unchanged. The validation consumer pins the actual
+final archive checksum. Public download, checksum and exact-version SwiftPM tag
+checks are performed as part of publishing the approved release.

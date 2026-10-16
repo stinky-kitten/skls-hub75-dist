@@ -26,6 +26,8 @@ No private implementation source or generated PIO header is distributed.
 - Comments clarify the 27-bit pulse-loop count and the blanking/LAT/OE sequence.
 - The embedded C shift-patching helper explicitly casts instruction encodings to
   `uint16_t` and marks its unused state-machine parameter with `(void)sm`.
+- The PIO initialisation, TX-stall and instruction-patching embedded C helpers are
+  also derived from the example; their existing notices remain applicable.
 - The RGB888 data program's instruction sequence is unchanged from that reference
   and uses 16 instruction slots. Together with the modified row program, the
   driver allocates 21 PIO0 instruction slots.
@@ -33,7 +35,7 @@ No private implementation source or generated PIO header is distributed.
 The derived PIO instructions and incorporated helper portions retain their
 applicable BSD-3-Clause licensing and Raspberry Pi attribution. They are distinct
 from the original proprietary driver implementation and public-interface grants.
-The proposed proprietary binary terms do not replace or override Raspberry Pi's
+The approved binary licence does not replace or override Raspberry Pi's
 BSD rights in its contribution. Combining that contribution with proprietary
 original code does not make Raspberry Pi's code exclusively proprietary or make
 the entire original driver open source.

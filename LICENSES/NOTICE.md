@@ -1,7 +1,9 @@
 # Incorporated third-party material
 
-This is the incorporated-material notice inventory, not permission to
-redistribute the proprietary driver or its public interface files.
+The skls-hub75 driver is an original software implementation developed by Stinky
+Kitten Limited. It is not a compiled distribution of Raspberry Pi's HUB75 example
+application. The Company's original contributions are covered by
+SKLS-HUB75-BINARY-LICENCE-1.0.txt; third-party rights remain independently licensed.
 
 | Material | Incorporated form | License / notice |
 |---|---|---|
@@ -27,7 +29,27 @@ must separately inventory and satisfy the notices for the components it links,
 including toolchain runtime and optional wireless/USB implementations. This package
 notice is not a complete-firmware license inventory.
 
-The PIO comparison and modifications are documented in PIO-PROVENANCE.md.
-PICO-EXAMPLES-BSD-3-Clause.txt includes the complete applicable upstream licence.
-Raspberry Pi's BSD-licensed contribution remains distinct from original proprietary
-code; proposed proprietary restrictions do not withdraw its existing BSD rights.
+## HUB75 PIO provenance and original driver implementation
+
+Material is derived from `raspberrypi/pico-examples/pio/hub75/hub75.pio`:
+
+Copyright (c) 2020 Raspberry Pi (Trading) Ltd.
+SPDX-License-Identifier: BSD-3-Clause
+
+The derived portions include the hub75_row and hub75_data_rgb888 PIO programs and
+the associated embedded C helpers: hub75_row_program_init and
+hub75_data_rgb888_program_init (PIO initialisation), hub75_wait_tx_stall (TX-stall
+handling) and hub75_data_rgb888_set_shift (instruction patching). Stinky Kitten's
+modifications include additional NOP instructions to adjust timing and blanking
+around the row-latch operation.
+
+The surrounding DMA management, buffering, PWM and bitplane scheduling, temporal
+dithering, timing calculations and display control were developed by Stinky Kitten
+Limited, which owns its original contributions. Raspberry Pi retains copyright
+and BSD-3-Clause rights in the derived portions. The approved custom licence does
+not override those independently granted rights or their licence conditions.
+
+PICO-SDK-BSD-3-Clause.txt contains the complete applicable Raspberry Pi copyright,
+conditions and disclaimer. The public release also includes the byte-identical
+PICO-EXAMPLES-BSD-3-Clause.txt and PIO-PROVENANCE.md with the pinned comparison and
+modifications. No third-party copyright or licence conditions are removed.
