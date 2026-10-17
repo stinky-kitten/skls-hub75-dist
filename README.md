@@ -1,11 +1,19 @@
 # SKLSHUB75 binary distribution
 
+**Published release history:** v0.1.0-experimental.1 is already published and
+immutable. The API examples below describe that release's earlier annotations.
+The private producer's newer `HUB75` interface is not yet in a subsequent release.
+For current release tooling, read [FINALIZATION.md](docs/FINALIZATION.md).
+Preparation writes an isolated review snapshot; it never updates published assets
+or the working checkout. The root `release.json` and original release notes remain
+historical preparation records, not live publication-status records.
+
 Experimental **0.1.0-experimental.1**, ABI **1**. Precompiled C HUB75 scanout for
 Raspberry Pi Pico 2 and Pico 2 W, qualified with Pico SDK 2.3.1 and 150 MHz clk_sys.
 Embedded Swift is a supported consumer through the **SKLSHUB75 Clang module** and
 versioned **SKLSHUB75.apinotes**. C and C++ use the same public C interface.
 
-**Prepared locally; not published.** The approved
+**Published experimental release.** The approved
 [Stinky Kitten HUB75 Binary Library Licence — Version 1.0](LICENSES/SKLS-HUB75-BINARY-LICENCE-1.0.txt)
 covers Stinky Kitten Limited's original contributions (company number 07306644).
 It permits worldwide, royalty-free personal, educational, research and commercial
@@ -20,11 +28,12 @@ distributed SDKs or reusable binary components require separate permission.
 These restrictions do not apply to completed firmware or independently BSD-licensed
 third-party contributions. See [NOTICE.md](LICENSES/NOTICE.md) and the full licence.
 
-The intended official repository is https://github.com/stinky-kitten/skls-hub75-dist .
-The planned tag is `v0.1.0-experimental.1`, with one complete
+The official repository is https://github.com/stinky-kitten/skls-hub75-dist .
+The immutable tag is `v0.1.0-experimental.1`, with one complete
 `skls-hub75-0.1.0-experimental.1-rp2350-arm-s.zip` asset and SHA256SUMS.
-No public download is live yet. Public download, checksum and exact-version SwiftPM
-tag verification are performed as part of publishing the approved release.
+The first release was published and its download/checksum/SwiftPM resolution were
+verified during publication. Every subsequent release needs its own qualification,
+approval and public verification; existing tags and assets must never be replaced.
 
 ## Firmware consumption
 
@@ -65,11 +74,11 @@ provide ownership, bounds checking or lifetime enforcement. Requests do not tran
 ownership or require an acknowledgement to Core 1.
 
 For **macOS host declaration tests only**, this repository exposes a declaration-only
-SwiftPM product `SKLSHUB75`. Depend on the exact `0.1.0-experimental.1` version after
-its tag is published. It includes the same generated headers, module map and notes
+SwiftPM product `SKLSHUB75`. Depend on the exact `0.1.0-experimental.1` version for that published release. It includes the same generated headers, module map and notes
 as the complete firmware asset, with no Arm archive and no autolink. It cannot supply
 hardware implementation functions to a host executable. See the release process for
-byte-for-byte interface consistency checks. No manually maintained header copy exists.
+byte-for-byte interface consistency checks. The new finalizer stages producer-generated interfaces for review without changing
+this historical checkout snapshot.
 
 ## Qualification and release preparation
 
@@ -80,7 +89,7 @@ not been qualified by these tests. This is an experimental API, not a stable 1.0
 Feature version and ABI version are separate: compatible features can change the
 experimental version; layout/enum/calling-convention changes require ABI review.
 
-[RELEASE.md](docs/RELEASE.md) explains release preparation, authoritative inputs,
+[RELEASE.md](docs/RELEASE.md) links the current release preparation, authoritative inputs,
 immutable assets and the approval/publication boundary. `release.json` records exact
 asset and component hashes. Do not commit generated Arm libraries into this repository.
 
