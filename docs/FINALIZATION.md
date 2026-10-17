@@ -1,9 +1,10 @@
 # Preparing a new binary release
 
 The first release, **v0.1.0-experimental.1**, is already published and immutable.
-Its tags, assets and historical `release.json` remain unchanged. That JSON records
-preparation-era status, not current publication state. The finalizer treats a version
-in that record or any release tag as used regardless of that status field.
+Its tags, assets and tagged historical `release.json` remain unchanged. Historical
+preparation-era JSON status is not proof of current publication state. The root
+`release.json` describes the current release, while each old tag retains its record.
+The finalizer treats a version in that record or any release tag as used regardless of that status field.
 No next release version is selected by this tooling.
 
 ## Authoritative inputs

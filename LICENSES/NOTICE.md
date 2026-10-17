@@ -50,6 +50,8 @@ and BSD-3-Clause rights in the derived portions. The approved custom licence doe
 not override those independently granted rights or their licence conditions.
 
 PICO-SDK-BSD-3-Clause.txt contains the complete applicable Raspberry Pi copyright,
-conditions and disclaimer. The public release also includes the byte-identical
+conditions and disclaimer. The existing public release also includes the byte-identical
 PICO-EXAMPLES-BSD-3-Clause.txt and PIO-PROVENANCE.md with the pinned comparison and
-modifications. No third-party copyright or licence conditions are removed.
+modifications. The private producer stages both files unchanged from that published tag alongside
+the Pico SDK licence, this notice and the approved binary/interface licence.
+All five files are required by its payload allowlist and covered by manifest hashes. No third-party copyright or licence conditions are removed.

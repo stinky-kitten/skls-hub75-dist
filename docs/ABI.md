@@ -18,6 +18,10 @@ or its plugin. Compatibility with other compilers/SDK releases is not qualified.
 Hard-float VFP argument passing, nonsecure images, RP2040 and RISC-V are unsupported.
 There are no nonsecure-callable entry veneers; this is an ordinary secure-image library.
 
+The expanded Swift API is published in v0.1.0-experimental.2;
+v0.1.0-experimental.1 retains its earlier annotations. Swift renaming does not
+change this C ABI. See [Swift API versions](SWIFT.md).
+
 ## Layout
 
 Target measurements (not macOS host sizes):
@@ -86,8 +90,9 @@ a deadline. Serialize Core-0 rendering/control operations as described by the he
 
 Six displayed bitplanes/four dither phases are the only admitted policy, despite
 configuration fields existing for other values. Scan-order, transfer/gamma,
-presentation divisor and target requests are runtime configuration within a
-running generation/reconfiguration lifecycle; not every requested rate is achievable.
+presentation divisor and target requests are supplied when initializing or
+reconfiguring. The resolved configuration is immutable within a running generation.
+Not every requested rate is achievable.
 Nonzero additional blanking is rejected. PIO transition delays are compiled in.
 Channel gains and brightness are compiled at 255; brightness gamma is 1.0.
 

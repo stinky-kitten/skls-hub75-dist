@@ -1,24 +1,226 @@
 Name: SKLSHUB75
+
 Functions:
+- Name: skls_hub75_pico_default_hardware
+  SwiftName: HUB75HardwareDescriptor.init(width:height:)
+
 - Name: skls_hub75_take_render_request
   SwiftName: takeRenderRequest(_:)
   Parameters:
   - Position: 0
     Nullability: O
+
 - Name: skls_hub75_config_preset_6bit_4phase_240hz
+  SwiftName: HUB75Configuration.apply6Bit4Phase240HzPreset(self:resolutionPolicy:)
   Parameters:
   - Position: 0
     Nullability: N
   - Position: 1
     Nullability: N
+
+- Name: skls_hub75_init
+  SwiftName: initializeHUB75(hardware:configuration:resolutionPolicy:)
+
+- Name: skls_hub75_get_status
+  SwiftName: readHUB75Status(into:)
+
+- Name: skls_hub75_core1_run
+  SwiftName: runHUB75Core1()
+
+- Name: skls_hub75_stop
+  SwiftName: stopHUB75()
+
+- Name: skls_hub75_reconfigure
+  SwiftName: reconfigureHUB75(hardware:configuration:resolutionPolicy:)
+
+- Name: skls_hub75_render_request_is_current
+  SwiftName: HUB75RenderRequest.isCurrent(self:)
+
+- Name: skls_hub75_config_validate
+  SwiftName: HUB75Configuration.validate(hardware:self:resolutionPolicy:)
+
+- Name: skls_hub75_config_resolve
+  SwiftName: HUB75Configuration.resolve(hardware:self:resolutionPolicy:systemClockHz:into:)
+
+- Name: skls_hub75_hardware_addressed_rows
+  SwiftName: HUB75HardwareDescriptor.addressedRows(self:)
+
+- Name: skls_hub75_hardware_address_bits
+  SwiftName: HUB75HardwareDescriptor.addressBits(self:)
+
 Tags:
-- Name: skls_hub75_render_request_t
-  SwiftName: RenderRequest
-- Name: skls_hub75_transfer_mode_t
-  SwiftName: TransferMode
+- Name: skls_hub75_hardware_descriptor_t
+  SwiftName: HUB75HardwareDescriptor
+
+- Name: skls_hub75_config_t
+  SwiftName: HUB75Configuration
+
+- Name: skls_hub75_resolution_policy_t
+  SwiftName: HUB75ResolutionPolicy
+
+- Name: skls_hub75_lifecycle_result_t
+  SwiftName: HUB75LifecycleResult
   EnumKind: NSEnum
+
+- Name: skls_hub75_render_request_t
+  SwiftName: HUB75RenderRequest
+
+- Name: skls_hub75_transfer_mode_t
+  SwiftName: HUB75TransferMode
+  EnumKind: NSEnum
+
+- Name: skls_hub75_status_t
+  SwiftName: HUB75Status
+
+- Name: skls_hub75_lifecycle_state_t
+  SwiftName: HUB75LifecycleState
+  EnumKind: NSEnum
+
+- Name: skls_hub75_target_result_t
+  SwiftName: HUB75TargetResult
+  EnumKind: NSEnum
+
+- Name: skls_hub75_config_result_t
+  SwiftName: HUB75ConfigurationResult
+  EnumKind: NSEnum
+
+- Name: skls_hub75_config_resolution_t
+  SwiftName: HUB75ConfigurationResolution
+
+- Name: skls_hub75_display_policy_t
+  SwiftName: HUB75DisplayPolicy
+  EnumKind: NSEnum
+
+- Name: skls_hub75_target_policy_t
+  SwiftName: HUB75TargetPolicy
+  EnumKind: NSEnum
+
+- Name: skls_hub75_resolution_mode_t
+  SwiftName: HUB75ResolutionMode
+  EnumKind: NSEnum
+
+- Name: skls_hub75_scan_schedule_t
+  SwiftName: HUB75ScanSchedule
+  EnumKind: NSEnum
+
 Enumerators:
 - Name: SKLS_HUB75_TRANSFER_MODE_LINEAR
-  SwiftName: TransferMode.linear
+  SwiftName: HUB75TransferMode.linear
 - Name: SKLS_HUB75_TRANSFER_MODE_GAMMA
-  SwiftName: TransferMode.gamma
+  SwiftName: HUB75TransferMode.gamma
+
+- Name: SKLS_HUB75_LIFECYCLE_RESULT_OK
+  SwiftName: HUB75LifecycleResult.ok
+- Name: SKLS_HUB75_LIFECYCLE_RESULT_INVALID_CONFIG
+  SwiftName: HUB75LifecycleResult.invalidConfig
+- Name: SKLS_HUB75_LIFECYCLE_RESULT_STORAGE_UNAVAILABLE
+  SwiftName: HUB75LifecycleResult.storageUnavailable
+- Name: SKLS_HUB75_LIFECYCLE_RESULT_STOP_TIMEOUT
+  SwiftName: HUB75LifecycleResult.stopTimeout
+- Name: SKLS_HUB75_LIFECYCLE_RESULT_START_TIMEOUT
+  SwiftName: HUB75LifecycleResult.startTimeout
+- Name: SKLS_HUB75_LIFECYCLE_RESULT_CALIBRATION_FAILED
+  SwiftName: HUB75LifecycleResult.calibrationFailed
+- Name: SKLS_HUB75_LIFECYCLE_RESULT_HARDWARE_FAILED
+  SwiftName: HUB75LifecycleResult.hardwareFailed
+- Name: SKLS_HUB75_LIFECYCLE_RESULT_ALREADY_INITIALIZED
+  SwiftName: HUB75LifecycleResult.alreadyInitialized
+
+- Name: SKLS_HUB75_LIFECYCLE_UNINITIALIZED
+  SwiftName: HUB75LifecycleState.uninitialized
+- Name: SKLS_HUB75_LIFECYCLE_CONFIGURING
+  SwiftName: HUB75LifecycleState.configuring
+- Name: SKLS_HUB75_LIFECYCLE_CALIBRATING
+  SwiftName: HUB75LifecycleState.calibrating
+- Name: SKLS_HUB75_LIFECYCLE_RUNNING
+  SwiftName: HUB75LifecycleState.running
+- Name: SKLS_HUB75_LIFECYCLE_QUIESCING
+  SwiftName: HUB75LifecycleState.quiescing
+- Name: SKLS_HUB75_LIFECYCLE_STOPPED
+  SwiftName: HUB75LifecycleState.stopped
+- Name: SKLS_HUB75_LIFECYCLE_FAILED
+  SwiftName: HUB75LifecycleState.failed
+
+- Name: SKLS_HUB75_TARGET_RESULT_ACHIEVED
+  SwiftName: HUB75TargetResult.achieved
+- Name: SKLS_HUB75_TARGET_RESULT_CONSTRAINT_LIMITED
+  SwiftName: HUB75TargetResult.constraintLimited
+- Name: SKLS_HUB75_TARGET_RESULT_FAILED
+  SwiftName: HUB75TargetResult.failed
+- Name: SKLS_HUB75_TARGET_RESULT_FIXED_TIMING
+  SwiftName: HUB75TargetResult.fixedTiming
+
+- Name: SKLS_HUB75_CONFIG_RESULT_OK
+  SwiftName: HUB75ConfigurationResult.ok
+- Name: SKLS_HUB75_CONFIG_RESULT_INVALID_ARGUMENT
+  SwiftName: HUB75ConfigurationResult.invalidArgument
+- Name: SKLS_HUB75_CONFIG_RESULT_INVALID_GEOMETRY
+  SwiftName: HUB75ConfigurationResult.invalidGeometry
+- Name: SKLS_HUB75_CONFIG_RESULT_UNSUPPORTED_GEOMETRY
+  SwiftName: HUB75ConfigurationResult.unsupportedGeometry
+- Name: SKLS_HUB75_CONFIG_RESULT_INVALID_PIN_LAYOUT
+  SwiftName: HUB75ConfigurationResult.invalidPinLayout
+- Name: SKLS_HUB75_CONFIG_RESULT_UNSUPPORTED_PIN_LAYOUT
+  SwiftName: HUB75ConfigurationResult.unsupportedPinLayout
+- Name: SKLS_HUB75_CONFIG_RESULT_INVALID_BIT_DEPTH
+  SwiftName: HUB75ConfigurationResult.invalidBitDepth
+- Name: SKLS_HUB75_CONFIG_RESULT_UNSUPPORTED_BIT_DEPTH
+  SwiftName: HUB75ConfigurationResult.unsupportedBitDepth
+- Name: SKLS_HUB75_CONFIG_RESULT_INVALID_DITHER
+  SwiftName: HUB75ConfigurationResult.invalidDither
+- Name: SKLS_HUB75_CONFIG_RESULT_UNSUPPORTED_DITHER
+  SwiftName: HUB75ConfigurationResult.unsupportedDither
+- Name: SKLS_HUB75_CONFIG_RESULT_INVALID_DISPLAY_POLICY
+  SwiftName: HUB75ConfigurationResult.invalidDisplayPolicy
+- Name: SKLS_HUB75_CONFIG_RESULT_INVALID_TRANSFER_MODE
+  SwiftName: HUB75ConfigurationResult.invalidTransferMode
+- Name: SKLS_HUB75_CONFIG_RESULT_INVALID_GAMMA
+  SwiftName: HUB75ConfigurationResult.invalidGamma
+- Name: SKLS_HUB75_CONFIG_RESULT_INVALID_TARGET
+  SwiftName: HUB75ConfigurationResult.invalidTarget
+- Name: SKLS_HUB75_CONFIG_RESULT_INVALID_TARGET_POLICY
+  SwiftName: HUB75ConfigurationResult.invalidTargetPolicy
+- Name: SKLS_HUB75_CONFIG_RESULT_INVALID_TIMING
+  SwiftName: HUB75ConfigurationResult.invalidTiming
+- Name: SKLS_HUB75_CONFIG_RESULT_PULSE_ENCODING_OVERFLOW
+  SwiftName: HUB75ConfigurationResult.pulseEncodingOverflow
+- Name: SKLS_HUB75_CONFIG_RESULT_INVALID_RESOLUTION_POLICY
+  SwiftName: HUB75ConfigurationResult.invalidResolutionPolicy
+- Name: SKLS_HUB75_CONFIG_RESULT_UNRESOLVED_AUTO
+  SwiftName: HUB75ConfigurationResult.unresolvedAuto
+- Name: SKLS_HUB75_CONFIG_RESULT_INVALID_SM_RATE
+  SwiftName: HUB75ConfigurationResult.invalidSMRate
+- Name: SKLS_HUB75_CONFIG_RESULT_UNSUPPORTED_SM_RATE
+  SwiftName: HUB75ConfigurationResult.unsupportedSMRate
+- Name: SKLS_HUB75_CONFIG_RESULT_UNSUPPORTED_BLANKING
+  SwiftName: HUB75ConfigurationResult.unsupportedBlanking
+
+- Name: SKLS_HUB75_DISPLAY_POLICY_CURRENT_6BIT_4PHASE
+  SwiftName: HUB75DisplayPolicy.current6Bit4Phase
+
+- Name: SKLS_HUB75_TARGET_POLICY_STRICT
+  SwiftName: HUB75TargetPolicy.strict
+- Name: SKLS_HUB75_TARGET_POLICY_BEST_EFFORT
+  SwiftName: HUB75TargetPolicy.bestEffort
+- Name: SKLS_HUB75_TARGET_POLICY_FIXED_TIMING
+  SwiftName: HUB75TargetPolicy.fixedTiming
+
+- Name: SKLS_HUB75_RESOLUTION_AUTO
+  SwiftName: HUB75ResolutionMode.auto
+- Name: SKLS_HUB75_RESOLUTION_FIXED
+  SwiftName: HUB75ResolutionMode.fixed
+
+- Name: SKLS_HUB75_SCAN_BITPLANE_MAJOR
+  SwiftName: HUB75ScanSchedule.bitplaneMajor
+- Name: SKLS_HUB75_SCAN_ROW_MAJOR
+  SwiftName: HUB75ScanSchedule.rowMajor
+- Name: SKLS_HUB75_SCAN_LOW3_ROW_GROUPED
+  SwiftName: HUB75ScanSchedule.low3RowGrouped
+- Name: SKLS_HUB75_SCAN_LOW4_ROW_GROUPED
+  SwiftName: HUB75ScanSchedule.low4RowGrouped
+- Name: SKLS_HUB75_SCAN_ROW_MAJOR_INTERLEAVED
+  SwiftName: HUB75ScanSchedule.rowMajorInterleaved
+- Name: SKLS_HUB75_SCAN_ROW_MAJOR_FOLDED
+  SwiftName: HUB75ScanSchedule.rowMajorFolded
+- Name: SKLS_HUB75_SCAN_SCHEDULE_COUNT
+  SwiftName: HUB75ScanSchedule.count
